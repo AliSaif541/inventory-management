@@ -16,13 +16,14 @@
     "axios": "^1.7.3",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.5",
+    "inventory-management-app": "file:",
     "next": "14.2.5",
     "openai": "^4.54.0",
     "react": "^18",
     "react-camera-pro": "^1.4.0",
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
-    "styled-components": "^6.1.12"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "eslint": "^8",
