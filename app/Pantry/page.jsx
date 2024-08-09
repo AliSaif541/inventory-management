@@ -7,6 +7,8 @@ import { Add as AddIcon, Delete as DeleteIcon, Info as InfoIcon, Search as Searc
 import { Camera } from 'react-camera-pro';
 import { firestore } from '@/firebase';
 import { collection, doc, getDocs, query, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const modalStyle = {
   position: 'absolute',
@@ -47,6 +49,13 @@ function Home() {
   const [filterCategory, setFilterCategory] = useState('');
   const [capturedImage, setCapturedImage] = useState(null); // State for captured image
   const camera = useRef(null);
+
+  const {data: session} = useSession({
+    required: true,
+    onUnauthenticated() {
+        redirect("/api/auth/signin?callbackUrl=/Pantry");
+    },
+  });
 
   const updateInventory = async () => {
     const snapshot = query(collection(firestore, `inventory`));
