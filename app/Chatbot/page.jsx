@@ -2,12 +2,14 @@
 
 import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import ProfileIcon from './profile-svgrepo-com.svg';
+import { usePantry } from '../{components}/PantryProvider';
 
 const Chatbot = () => {
+    const { inventory } = usePantry();
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
@@ -35,46 +37,50 @@ const Chatbot = () => {
             { role: 'user', content: message },
             { role: 'assistant', content: '' },
         ])
-        
-        try {
-            const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify([...messages, { role: 'user', content: message }]),
-            })
-        
-            if (!response.ok) {
-            throw new Error('Network response was not ok')
-            }
-        
-            const reader = response.body.getReader()
-            const decoder = new TextDecoder()
-        
-            while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
-            const text = decoder.decode(value, { stream: true })
-            setMessages((messages) => {
-                let lastMessage = messages[messages.length - 1]
-                let otherMessages = messages.slice(0, messages.length - 1)
-                return [
-                ...otherMessages,
-                { ...lastMessage, content: lastMessage.content + text },
-                ]
-            })
-        }
 
-        setIsLoading(false)
+        try {
+            console.log("Pantry Data: ", inventory);
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    messages: [...messages, message],
+                    pantry: inventory,
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+    
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const text = decoder.decode(value, { stream: true });
+                setMessages((messages) => {
+                    let lastMessage = messages[messages.length - 1];
+                    let otherMessages = messages.slice(0, messages.length - 1);
+                    return [
+                        ...otherMessages,
+                        { ...lastMessage, content: lastMessage.content + text },
+                    ];
+                });
+            }
+    
+            setIsLoading(false);
         } catch (error) {
-            console.error('Error:', error)
+            console.error('Error:', error);
             setMessages((messages) => [
-            ...messages,
-            { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
-            ])
+                ...messages,
+                { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
+            ]);
         }
-    }
+    };    
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {

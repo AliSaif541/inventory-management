@@ -1,6 +1,7 @@
 import "./globals.css";
 import AuthProvider from "./{components}/AuthProvider";
 import Nav from "./{components}/Nav";
+import { PantryProvider } from "./{components}/PantryProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,8 +13,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AuthProvider>
-          <Nav />
-          <div>{children}</div>
+          <PantryProvider>
+            <Nav />
+            <div>{children}</div>
+          </PantryProvider>
         </AuthProvider>
       </body>
     </html>
