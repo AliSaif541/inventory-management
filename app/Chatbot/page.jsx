@@ -98,22 +98,21 @@ const Chatbot = () => {
     }, [messages])
 
     return (
-        <Box
-      maxWidth="100vw"
-      minHeight="90vh"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      backgroundColor="#dbdcdc"
-      sx={{
-        padding: 2,
-      }}
+      <Box
+        width="100%" 
+        minHeight="100vh"
+        display="flex"
+        flexDirection="column"
+        backgroundColor="#dbdcdc"
+        sx={{
+            padding: 2,
+        }}
     >
+      <h1 className="text-[30px] text-center my-4">Pantry Chatbot</h1>
       <Stack
         direction={"column"}
-        width={{ xs: "90%", sm: "1000px" }}
-        height={{ xs: "80vh", sm: "600px" }}
+        width={{ xs: "100%" }}
+        height={{ xs: "83vh"}}
         borderRadius={2}
         boxShadow={3}
         p={3}
