@@ -5,6 +5,7 @@ import { collection, query, getDocs, getDoc, setDoc, deleteDoc, doc } from "fire
 import { firestore } from "@/firebase";
 import { useSession } from "next-auth/react";
 import { encodeUserIdentifier } from "../utils/encodeUserIdentifier";
+import { redirect } from "next/navigation";
 
 const PantryContext = createContext();
 

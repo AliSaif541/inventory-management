@@ -10,12 +10,15 @@ const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: '#212121',
-  borderRadius: 1,
-  boxShadow: 24,
-  p: 4,
+  transform: 'translate(-50%, -60%)',
+  width: '50%',
+  minHeight: '375px',
+  p: 4, 
+  backgroundColor: 'white', 
+  borderRadius: 2, 
+  boxShadow: 1, 
+  mx: 'auto', 
+  mt: 4,
 };
 
 const cameraModalStyle = {
@@ -96,14 +99,12 @@ function Home() {
   return (
     <Box
       width="100%"
-      height="100vh"
+      minHeight="100vh"
       display={'flex'}
       flexDirection={'column'}
       alignItems={'center'}
       gap={2}
       p={4}
-      // bgcolor={'#212121'}
-      // color={'#ffffff'}
       overflow={'auto'}
     >
       <Modal
@@ -113,7 +114,7 @@ function Home() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" color={'#aa00ff'} sx={{ fontWeight: 'bold' }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" color={'black'} sx={{ fontWeight: 'bold' }}>
             Add Item
           </Typography>
           <Stack spacing={2} mt={2}>
@@ -125,10 +126,10 @@ function Home() {
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
               InputLabelProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black',},
               }}
               InputProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black', borderRadius: '10px', height: '50px', alignItems: 'center' },
               }}
             />
             <TextField
@@ -139,10 +140,10 @@ function Home() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               InputLabelProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black' },
               }}
               InputProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black', borderRadius: '10px', height: '50px', alignItems: 'center' },
               }}
             />
             <TextField
@@ -153,10 +154,10 @@ function Home() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               InputLabelProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black' },
               }}
               InputProps={{
-                style: { color: '#ffffff' },
+                style: { color: 'black', borderRadius: '10px', height: '50px', alignItems: 'center' },
               }}
             />
             <Button
@@ -168,12 +169,21 @@ function Home() {
                 setDescription('');
                 handleClose();
               }}
-              sx={{ bgcolor: '#aa00ff' }}
+              sx={{ bgcolor: 'black', '&:hover': {bgcolor: '#000000'} }}
               startIcon={<AddIcon />}
             >
               Add
             </Button>
           </Stack>
+          <Button
+              variant="contained"
+              onClick={() => {
+                handleClose();
+              }}
+              sx={{ bgcolor: 'black', marginTop: '10px', '&:hover': {bgcolor: '#000000'} }}
+            >
+              Close
+          </Button>
         </Box>
       </Modal>
 
@@ -183,8 +193,8 @@ function Home() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" color={'#aa00ff'} sx={{ fontWeight: 'bold' }}>
+        <Box sx={modalStyle} alignItems='center' justifyContent='center'>
+          <Typography id="modal-modal-title" variant="h6" component="h2" color={'black'} sx={{ fontWeight: 'bold' }}>
             Item Details
           </Typography>
           <Typography variant="body1" mt={2}>
@@ -207,7 +217,7 @@ function Home() {
           <Button
             variant="contained"
             onClick={handleTakePhoto}
-            sx={{ mt: 2, bgcolor: '#aa00ff' }}
+            sx={{ mt: 2, bgcolor: 'black', '&:hover': {bgcolor: '#000000'} }}
             startIcon={<CameraAltIcon />}
           >
             Take Photo
@@ -217,7 +227,7 @@ function Home() {
 
       <Box width="100%" maxWidth="1200px">
         <h1 className="text-[30px] text-start my-6">Pantry Dashboard</h1>
-        <Stack direction="column" spacing={2} alignItems="start" justifyContent="start" mb={10} gap={2} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }}  >
+        <Stack direction="column" spacing={2} alignItems="start" justifyContent="start" gap={2} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }} >
           <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%' }}>
             <Button
               variant="contained"
@@ -285,39 +295,42 @@ function Home() {
             />
           </Stack>
         </Stack>
-        <Stack direction="row" flexWrap="wrap" gap={2} justifyContent="center">
-          {filteredInventory.map((item) => (
-            <Card key={item.name} sx={{ minWidth: 275, bgcolor: '#424242', color: '#ffffff' }}>
-              <Box sx={{ p: 2 }}>
-                <Typography variant="h6" gutterBottom>
-                  {item.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.description || 'No description'}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Category: {item.category || 'Uncategorized'}
-                </Typography>
-                <Stack direction="row" spacing={1} mt={2}>
-                  <Button
-                    variant="contained"
-                    onClick={() => handleViewOpen(item.description, item.category)}
-                    sx={{ bgcolor: '#aa00ff' }}
-                    startIcon={<InfoIcon />}
-                  >
-                    View Details
-                  </Button>
-                  <IconButton
-                    onClick={() => removeItem(item.name)}
-                    sx={{ bgcolor: '#aa00ff', color: '#ffffff' }}
-                    aria-label="delete"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Stack>
-              </Box>
-            </Card>
-          ))}
+        <Stack justifyContent="center" sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }} >
+          <h1 className="text-[24px] text-start my-6">Pantry List</h1>
+          <Stack direction="row" flexWrap="wrap" gap={2} justifyContent="center" >
+            {filteredInventory.map((item) => (
+              <Card key={item.name} sx={{ minWidth: 275, bgcolor: 'white', color: '#000000' }}>
+                <Box sx={{ p: 2 }}>
+                  <Typography variant="h6" gutterBottom>
+                    {item.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {item.description || 'No description'}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Category: {item.category || 'Uncategorized'}
+                  </Typography>
+                  <Stack direction="row" spacing={1} mt={2}>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleViewOpen(item.description, item.category)}
+                      sx={{ bgcolor: '#000000', '&:hover': {bgcolor: '#000000'} }}
+                      startIcon={<InfoIcon />}
+                    >
+                      View Details
+                    </Button>
+                    <IconButton
+                      onClick={() => removeItem(item.name)}
+                      sx={{ bgcolor: '#000000', color: '#ffffff', '&:hover': {bgcolor: '#000000'} }}
+                      aria-label="delete"
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Stack>
+                </Box>
+              </Card>
+            ))}
+          </Stack>
         </Stack>
       </Box>
     </Box>
