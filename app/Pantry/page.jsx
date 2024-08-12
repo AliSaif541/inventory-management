@@ -227,7 +227,7 @@ function Home() {
 
       <Box width="100%" maxWidth="1200px">
         <h1 className="text-[30px] text-start my-6">Pantry Dashboard</h1>
-        <Stack direction="column" spacing={2} alignItems="start" justifyContent="start" gap={2} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }} >
+        <Stack direction="column" spacing={2} alignItems="start" justifyContent="start" gap={2} mb={4} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }} >
           <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%' }}>
             <Button
               variant="contained"
