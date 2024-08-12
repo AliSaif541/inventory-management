@@ -102,8 +102,8 @@ function Home() {
       alignItems={'center'}
       gap={2}
       p={4}
-      bgcolor={'#212121'}
-      color={'#ffffff'}
+      // bgcolor={'#212121'}
+      // color={'#ffffff'}
       overflow={'auto'}
     >
       <Modal
@@ -216,55 +216,75 @@ function Home() {
       </Modal>
 
       <Box width="100%" maxWidth="1200px">
-        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" mb={2}>
-          <Button
-            variant="contained"
-            onClick={handleOpen}
-            sx={{ bgcolor: '#aa00ff' }}
-            startIcon={<AddIcon />}
-          >
-            Add Item
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleCameraOpen}
-            sx={{ bgcolor: '#aa00ff' }}
-            startIcon={<CameraAltIcon />}
-          >
-            Scan Item
-          </Button>
-          <TextField
-            id="search"
-            label="Search"
-            variant="outlined"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            sx={{ width: '300px' }}
-          />
-          <TextField
-            id="filter"
-            label="Filter by Category"
-            variant="outlined"
-            value={filterCategory}
-            onChange={(e) => setFilterCategory(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <FilterListIcon />
-                </InputAdornment>
-              ),
-            }}
-            sx={{ width: '300px' }}
-          />
+        <h1 className="text-[30px] text-start my-6">Pantry Dashboard</h1>
+        <Stack direction="column" spacing={2} alignItems="start" justifyContent="start" mb={10} gap={2} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }}  >
+          <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%' }}>
+            <Button
+              variant="contained"
+              onClick={handleOpen}
+              sx={{ bgcolor: '#000000', '&:hover': {bgcolor: '#000000'}}}
+              startIcon={<AddIcon />}
+            >
+              Add Item
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleCameraOpen}
+              sx={{ bgcolor: '#000000', '&:hover': {bgcolor: '#000000'} }}
+              startIcon={<CameraAltIcon />}
+            >
+              Scan Item
+            </Button>
+          </Stack>
+          <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%', mt: 2 }}>
+            <TextField
+              id="search"
+              label="Search"
+              variant="outlined"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FilterListIcon />
+                  </InputAdornment>
+                ),
+                
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: '#000000', 
+                  
+                },
+              }}
+              sx={{ width: '95%' }}
+            />
+          </Stack>
+          <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%', mt: 2 }}>
+            <TextField
+              id="filter"
+              label="Filter by Category"
+              variant="outlined"
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FilterListIcon />
+                  </InputAdornment>
+                ),
+                
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: '#000000', 
+                  
+                },
+              }}
+              sx={{ width: '95%' }}
+            />
+          </Stack>
         </Stack>
-
         <Stack direction="row" flexWrap="wrap" gap={2} justifyContent="center">
           {filteredInventory.map((item) => (
             <Card key={item.name} sx={{ minWidth: 275, bgcolor: '#424242', color: '#ffffff' }}>
