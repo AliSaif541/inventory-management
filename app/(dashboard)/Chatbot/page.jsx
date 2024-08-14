@@ -2,7 +2,7 @@
 
 import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
-import { useEffect, useRef, useState, useContext } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import ProfileIcon from './profile-svgrepo-com.svg';
@@ -14,7 +14,7 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
-            content: "Hi! I'm Pantry AI. How can I help you today?",
+            content: "Hi! I&#39;m Pantry AI. How can I help you today?",
         },
     ]);
     const [message, setMessage] = useState('');
@@ -113,7 +113,7 @@ const Chatbot = () => {
       <Stack textAlign='center' justifyContent='center' mb={4} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }}>
         <h1 className="text-[30px] text-center my-4">Pantry AI</h1>
         <p>
-          I'm Pantry AI, your friendly and knowledgeable assistant here to help you manage your pantry, discover delicious recipes, and provide all the food-related information you need. With the items in your pantry, I'll offer personalized suggestions and guidance to make your cooking experience enjoyable and efficient.
+          I&#39;m Pantry AI, your friendly and knowledgeable assistant here to help you manage your pantry, discover delicious recipes, and provide all the food-related information you need. With the items in your pantry, I&#39;ll offer personalized suggestions and guidance to make your cooking experience enjoyable and efficient.
         </p>
       </Stack>
       <Stack
