@@ -1,4 +1,5 @@
 import AuthProvider from "../(dashboard)/{components}/AuthProvider";
+import { Analytics } from "@vercel/analytics/react"
 import "../globals.css"
 import Nav from "./{components}/Nav";
 
@@ -16,8 +17,8 @@ export default function RootLayout({ children }) {
           <Nav />
           {children}
         </div>
-      
       </AuthProvider>
+      <Analytics />
       </body>
     </html>
   );
