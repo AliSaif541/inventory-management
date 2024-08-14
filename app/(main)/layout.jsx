@@ -1,4 +1,6 @@
+import AuthProvider from "../(dashboard)/{components}/AuthProvider";
 import "../globals.css"
+import Nav from "./{components}/Nav";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,9 +11,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <AuthProvider>
         <div>
+          <Nav />
           {children}
         </div>
+      
+      </AuthProvider>
       </body>
     </html>
   );

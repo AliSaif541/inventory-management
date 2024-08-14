@@ -37,13 +37,6 @@ export function SidebarDemo() {
       ),
     },
     {
-      label: "Profile",
-      href: "/Profile",
-      icon: (
-        <IconUserBolt className="text-white dark:text-white h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
       label: session ? "Logout" : "Login",
       href: session ? "/api/auth/signout?callbackUrl=/" : "/api/auth/signin",
       icon: (
