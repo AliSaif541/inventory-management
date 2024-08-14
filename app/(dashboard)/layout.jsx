@@ -1,6 +1,5 @@
-import "./globals.css";
+import "../globals.css";
 import AuthProvider from "./{components}/AuthProvider";
-import Nav from "./{components}/Nav";
 import { PantryProvider } from "./{components}/PantryProvider";
 import { SidebarDemo } from "./{components}/Sidebar";
 import { cn } from "@/lib/utils";
@@ -16,12 +15,10 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <PantryProvider>
-            {/* <Nav /> */}
             <div className={cn(
               "flex md:flex-row flex-col w-full h-[100vh]",
-              "max-w-7xl"
             )}>
-              <SidebarDemo className="w-1/4 md:w-1/5" /> {/* Adjust the width as needed */}
+              <SidebarDemo className="w-1/4 md:w-1/5" />
               <div className="flex-1 overflow-auto">
                 {children}
               </div>

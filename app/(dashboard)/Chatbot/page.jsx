@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, useContext } from 'react'
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import ProfileIcon from './profile-svgrepo-com.svg';
+import ReactMarkdown from 'react-markdown';
 import { usePantry } from '../{components}/PantryProvider';
 
 const Chatbot = () => {
@@ -13,7 +14,7 @@ const Chatbot = () => {
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
-            content: "Hi! I'm the Headstarter support assistant. How can I help you today?",
+            content: "Hi! I'm Pantry AI. How can I help you today?",
         },
     ]);
     const [message, setMessage] = useState('');
@@ -90,7 +91,7 @@ const Chatbot = () => {
     }
 
     const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
     useEffect(() => {
@@ -103,16 +104,22 @@ const Chatbot = () => {
         minHeight="100vh"
         display="flex"
         flexDirection="column"
-        backgroundColor="#dbdcdc"
+        justifyContent='center'
+        alignItems="center"
         sx={{
             padding: 2,
         }}
     >
-      <h1 className="text-[30px] text-center my-4">Pantry Chatbot</h1>
+      <Stack textAlign='center' justifyContent='center' mb={4} sx={{ width: '100%', boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '20px' }}>
+        <h1 className="text-[30px] text-center my-4">Pantry AI</h1>
+        <p>
+          I'm Pantry AI, your friendly and knowledgeable assistant here to help you manage your pantry, discover delicious recipes, and provide all the food-related information you need. With the items in your pantry, I'll offer personalized suggestions and guidance to make your cooking experience enjoyable and efficient.
+        </p>
+      </Stack>
       <Stack
         direction={"column"}
         width={{ xs: "100%" }}
-        height={{ xs: "83vh"}}
+        height={{ xs: "90vh"}}
         borderRadius={2}
         boxShadow={3}
         p={3}
@@ -169,7 +176,11 @@ const Chatbot = () => {
                   maxWidth: "80%",
                 }}
               >
-                {message.content}
+                {message.role === "assistant" ? (
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                ) : (
+                  message.content
+                )}
               </Box>
               {message.role === "user" && (
                 <Avatar
@@ -188,7 +199,6 @@ const Chatbot = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            // disabled={loading}
             variant="outlined"
             InputProps={{
               sx: {

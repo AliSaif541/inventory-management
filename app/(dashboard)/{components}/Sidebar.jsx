@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "../../../components/ui/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -18,7 +18,7 @@ export function SidebarDemo() {
   const {data: session} = useSession({
     required: true,
     onUnauthenticated() {
-        redirect("/api/auth/signin?callbackUrl=/Chatbot");
+      redirect("/api/auth/signin?callbackUrl=/Pantry");
     },
   });
   const links = [
